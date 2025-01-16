@@ -16,5 +16,13 @@ module BlogApp
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.i18n.default_locale = :ja
+
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
+    config.logger = ActiveSupport::Logger.new(STDOUT)
+    config.logger.formatter = proc do |severity, time, progname, msg|
+      "#{time.in_time_zone('Tokyo').strftime('%Y-%m-%d %H:%M:%S')} #{severity}: #{msg}\n"
+    end
   end
 end
